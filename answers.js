@@ -139,7 +139,9 @@ console.log(vaccinatedPets());
 //4. What are the names of all the pets, and what type of animal is each?
 
 const getNameAndType = ({ pets }) => {
-  const nameAndType = pets.map((pet) => [pet.name, pet.type]);
+  const nameAndType = pets.map(({ name, type }) => {
+    return { name, type };
+  });
   return nameAndType;
 };
 
@@ -147,7 +149,7 @@ const nameAndTypeOfpet = () => {
   return data.map(getNameAndType);
 };
 
-console.log(nameAndTypeOfpet());
+console.log("nameAndTypeOfPet ", nameAndTypeOfpet());
 
 //5. Which cities do the individuals live in?
 
@@ -159,18 +161,20 @@ console.log(getCities());
 
 // 6. How many hobbies are shared across the group? What are they?
 
-const getUniqueHobbies = () => {
-  const hobbies = data.flatMap((person) => person.hobbies);
-  return hobbies.reduce((uniqueHobbies, { type }) => {
-    if (!uniqueHobbies.includes(type)) {
-      uniqueHobbies.push(type);
-    }
+const unique = (uniqueHobbies, { type }) => {
+  if (!uniqueHobbies.includes(type)) {
+    uniqueHobbies.push(type);
+  }
 
-    return uniqueHobbies;
-  }, []);
+  return uniqueHobbies;
 };
 
-console.log(getUniqueHobbies());
+const getUniqueHobbies = () => {
+  const hobbies = data.flatMap((person) => person.hobbies);
+  return hobbies.reduce(unique, []);
+};
+
+console.log("getUniqueHobbies ", getUniqueHobbies());
 
 //7. How many pets belong to people who are currently unemployed?
 
@@ -291,13 +295,8 @@ console.log(moreThanTwoHobbies());
 //16. How many individuals share at least one hobby with Ramesh?
 
 const getHobbiesOf = (personName) => {
-  return data.reduce((personHobbies, person) => {
-    if (person.name === personName) {
-      return person.hobbies.flatMap(({ type }) => type);
-    }
-
-    return personHobbies;
-  }, []);
+  const person = data.find(({ name }) => name === personName);
+  return person.hobbies.flatMap(({ type }) => type);
 };
 
 const commonHobbiesLikeRamesh = () => {
@@ -322,7 +321,7 @@ const youngestPet = () => {
   return pets.reduce(
     (nameAndAge, { name, age }) => {
       if (age !== 0) {
-        return [name, Math.min(nameAndAge[1], age)];
+        return nameAndAge[1] < age ? nameAndAge : [name, age];
       }
 
       return nameAndAge;
@@ -331,7 +330,7 @@ const youngestPet = () => {
   );
 };
 
-console.log("youngestPe ", youngestPet());
+console.log("youngestPet ", youngestPet());
 
 // 18. What types of books are mentioned as interests, and who reads them?
 
