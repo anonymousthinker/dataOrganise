@@ -122,7 +122,7 @@ console.log(noOfPeopleEmployed());
 //2. How many people own a car?
 
 const peopleOwningCar = () => {
-  return data.filter((data) => data.hasCar).length;
+  return data.filter(({ hasCar }) => hasCar).length;
 };
 
 console.log(peopleOwningCar());
@@ -214,7 +214,7 @@ console.log(noOfCsStudents());
 //10. How many individuals own more than one pet?
 
 const moreThanOnePet = () => {
-  const noOfPetsPerPerson = data.map(({ pets }) => pets.length);
+  const noOfPetsPerPerson = data.filter(({ pets }) => pets.length > 1);
   return noOfPetsPerPerson.reduce((countOfPeople, noOfPets) => {
     return noOfPets > 1 ? countOfPeople + 1 : countOfPeople;
   }, 0);
@@ -234,8 +234,9 @@ console.log(petsAndTheirActivities());
 //12. What are the names of all animals that belong to people who live in Bangalore or Chennai?
 
 const petsOfBangaloreChennai = () => {
-  const peopleOfBangaloreAndChennai = data.filter(
-    ({ city }) => city === "Bangalore" || city === "Chennai"
+  const cities = ["Bangalore", "Chennai"];
+  const peopleOfBangaloreAndChennai = data.filter(({ city }) =>
+    cities.includes(city)
   );
   const pets = peopleOfBangaloreAndChennai.flatMap(({ pets }) => pets);
   return pets.map(({ name }) => name);
@@ -303,10 +304,7 @@ const commonHobbiesLikeRamesh = () => {
   const rameshHobbies = getHobbiesOf("Ramesh");
 
   const peopleHavingCommonHobbies = data.filter(({ hobbies }) => {
-    const commonHobbies = hobbies.filter(({ type }) =>
-      rameshHobbies.includes(type)
-    );
-    return commonHobbies.length !== 0;
+    return hobbies.some((hobby) => rameshHobbies.includes(hobby));
   });
 
   return peopleHavingCommonHobbies.length - 1;
