@@ -1,11 +1,11 @@
-const data = [
+export const report = [
   {
     name: "Rahul",
     age: 0,
     education: ["Computer Science"],
     employment: {
       status: true,
-      profession: "software developer",
+      profession: "Software Developer",
     },
     hobbies: [
       { type: "Chess", specifics: "" },
@@ -15,8 +15,8 @@ const data = [
     city: "Pune",
     pets: [
       {
-        type: "dog",
-        breed: "golden retriever",
+        type: "Dog",
+        breed: "Golden Retriever",
         name: "Max",
         age: 4,
         vaccinated: true,
@@ -34,14 +34,14 @@ const data = [
       profession: "",
     },
     hobbies: [
-      { type: "Cooking", specifics: "experiment with italian recipes" },
+      { type: "Cooking", specifics: "Experiment with italian recipes" },
     ],
     hasCar: false,
     city: "Bangalore",
     pets: [
       {
-        type: "bird",
-        breed: "parrot",
+        type: "Bird",
+        breed: "Parrot",
         name: "Kiwi",
         age: 0,
         vaccinated: true,
@@ -66,16 +66,16 @@ const data = [
     city: "Jaipur",
     pets: [
       {
-        type: "cat",
-        breed: "persian cat",
+        type: "Cat",
+        breed: "Persian cat",
         name: "Bella",
         age: 3,
         vaccinated: true,
         favoriteActivity: "Lounging in the sun",
       },
       {
-        type: "cat",
-        breed: "persian cat",
+        type: "Cat",
+        breed: "Persian cat",
         name: "Leo",
         age: 3,
         vaccinated: true,
@@ -90,7 +90,7 @@ const data = [
     education: [],
     employment: {
       status: false,
-      profession: "dancer",
+      profession: "Dancer",
     },
     hobbies: [
       { type: "Watching", specifics: "Binge-watch sci-fi shows" },
@@ -100,7 +100,7 @@ const data = [
     city: "Chennai",
     pets: [
       {
-        type: "rabbit",
+        type: "Rabbit",
         breed: "",
         name: "Snowy",
         age: 2,
